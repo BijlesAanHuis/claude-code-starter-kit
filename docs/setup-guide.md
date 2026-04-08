@@ -6,6 +6,8 @@ Detailed reference for file structure, MCP server patterns, and common pitfalls.
 
 ## File Structure
 
+> **Note:** Paths below use `~/` (Mac/Linux). On Windows, the Claude Code config lives in `%USERPROFILE%\.claude\` (e.g. `C:\Users\YourName\.claude\`). The structure inside is the same.
+
 This is what a working Claude Code setup looks like:
 
 ```
@@ -120,20 +122,19 @@ If an MCP server does not start, it is almost always a missing npm or pip depend
 **Wrong PATH**
 Node-based servers need `npx` to be findable. If it fails, add the full path in your run script:
 ```bash
+# Mac/Linux
 exec /usr/local/bin/npx -y @some/mcp-server
+
+# Or find it with: which npx
 ```
 
-**Permissions on .env files**
+**Permissions on .env files (Mac/Linux)**
 Keep API keys secure:
 ```bash
 chmod 600 ~/.claude/mcp-servers/*/.env
-```
-
-**Permissions on run scripts**
-Make them executable:
-```bash
 chmod 700 ~/.claude/mcp-servers/*/run.sh
 ```
+On Windows, `.env` files are not executable by default, so this is less of a concern. Just make sure they are not committed to git (the `.gitignore` in this repo handles that).
 
 **The `.mcp.json` file**
 Some setups use `~/.mcp.json` instead of `settings.json` for server configs. Both work. Pick one and stick with it.

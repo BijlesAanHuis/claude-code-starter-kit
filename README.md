@@ -5,7 +5,7 @@ Everything you need to go from zero to a fully connected Claude Code setup.
 ### TL;DR — 5 minutes to get started
 
 1. `npm install -g @anthropic-ai/claude-code`
-2. `brew install gh && gh auth login`
+2. Install the GitHub CLI (`brew install gh` / `winget install GitHub.cli`) and run `gh auth login`
 3. Tell Claude: *"Read the repo at github.com/BijlesAanHuis/claude-code-starter-kit and help me set up my environment"*
 
 That is it. Claude reads this guide and walks you through the rest. Everything below explains what each part does and why.
@@ -58,7 +58,17 @@ Or if you prefer the desktop app: [claude.ai/download](https://claude.ai/downloa
 Before doing anything else, install the GitHub CLI and log in:
 
 ```bash
+# Mac
 brew install gh
+
+# Windows
+winget install GitHub.cli
+
+# Linux
+sudo apt install gh   # or: sudo dnf install gh
+```
+Then log in:
+```bash
 gh auth login
 ```
 
