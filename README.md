@@ -87,6 +87,115 @@ Edit `~/.claude/settings.json`:
 
 See [examples/mcp-configs.md](./examples/mcp-configs.md) for configs for 20+ tools.
 
+Browse the official MCP servers repo for reference implementations: **[github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)**
+
+#### The File Structure That Matters
+
+This is where most people get stuck. Claude Code needs a specific directory structure and the right packages installed. Here is what a working setup looks like:
+
+```
+~/.claude/
+├── settings.json          ← Global settings (hooks, plugins, effort level)
+├── settings.local.json    ← Permissions (auto-allow tools)
+├── CLAUDE.md              ← Global instructions
+├── skills/                ← Your slash commands (markdown files)
+│   ├── bug-triage.md
+│   ├── ship.md
+│   └── code-review.md
+├── mcp-servers/           ← Local MCP server installations
+│   ├── github/
+│   │   ├── .env           ← API keys (never commit this)
+│   │   └── run.sh         ← Startup script
+│   ├── hubspot/
+│   │   ├── .env
+│   │   └── run.sh
+│   └── my-custom-server/
+│       ├── .env
+│       ├── run.sh
+│       ├── package.json   ← Dependencies
+│       └── node_modules/  ← Installed packages
+└── projects/
+    └── {project}/
+        └── memory/        ← Per-project memory
+            ├── MEMORY.md
+            └── *.md
+```
+
+**There are two patterns for MCP servers:**
+
+**Pattern 1: Remote servers (easy)** — Use `@anthropic/mcp-remote` with a URL. Auth happens via browser popup. No local files needed.
+```json
+"atlassian": {
+  "command": "npx",
+  "args": ["-y", "@anthropic/mcp-remote", "https://mcp.atlassian.com/v1/sse"]
+}
+```
+
+**Pattern 2: Local servers (more control)** — A folder in `~/.claude/mcp-servers/` with a run script and `.env` file:
+```bash
+# ~/.claude/mcp-servers/github/run.sh
+#!/bin/bash
+set -e
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+set -a
+source "$SCRIPT_DIR/.env"
+set +a
+exec npx -y @modelcontextprotocol/server-github
+```
+
+```bash
+# ~/.claude/mcp-servers/github/.env
+GITHUB_TOKEN=ghp_your-token-here
+```
+
+Then in your config, reference the run script:
+```json
+"github": {
+  "command": "bash",
+  "args": ["/path/to/.claude/mcp-servers/github/run.sh"]
+}
+```
+
+**Pattern 3: Python-based servers** — Some servers need a Python venv:
+```
+mcp-servers/my-python-server/
+├── .env
+├── .venv/           ← Python virtual environment
+├── run.sh
+├── requirements.txt
+└── src/
+```
+
+The run script activates the venv:
+```bash
+#!/bin/bash
+set -e
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+set -a
+source "$SCRIPT_DIR/.env"
+set +a
+exec "$SCRIPT_DIR/.venv/bin/python" -m my_server
+```
+
+#### Common Pitfalls
+
+1. **Missing packages.** If an MCP server does not start, it is almost always a missing npm/pip dependency. Check the server's README for install instructions.
+2. **Wrong PATH.** Node-based servers need `npx` to be findable. If it fails, add the full path to npx in your run script.
+3. **Permissions on .env files.** Keep API keys secure: `chmod 600 ~/.claude/mcp-servers/*/.env`
+4. **Permissions on run scripts.** Make them executable: `chmod 700 ~/.claude/mcp-servers/*/run.sh`
+5. **The `.mcp.json` file.** Some setups use `~/.mcp.json` instead of `settings.json` for server configs. Both work. Pick one and stick with it.
+
+#### The Best Approach: Let Claude Do It
+
+Seriously. Instead of manually creating folders, writing run scripts, and debugging PATH issues:
+
+```
+Set up the Atlassian MCP server for me. I want it as a local installation
+in ~/.claude/mcp-servers/ with a run.sh and .env file.
+```
+
+Claude will create the directory, write the run script, install packages, configure auth, and add it to your settings. If something breaks, it will debug it too.
+
 ### Step 4: Add Skills (Slash Commands)
 
 A skill is a reusable prompt saved as a markdown file. You invoke it with `/skill-name`.
@@ -176,9 +285,11 @@ missing error handling, and breaking API changes. Be specific.
 ## Resources
 
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [MCP Server Directory (official)](https://modelcontextprotocol.io/servers)
+- [Official MCP Servers repo](https://github.com/modelcontextprotocol/servers) — Reference implementations by Anthropic
+- [MCP Server Directory](https://modelcontextprotocol.io/servers) — Browsable list of available servers
 - [Awesome MCP Servers (community)](https://github.com/punkpeye/awesome-mcp-servers) — Large curated list of 1000+ MCP servers
 - [MCP.so](https://mcp.so/) — Searchable directory of MCP servers
+- [Smithery](https://smithery.ai/) — Another searchable MCP directory
 - [ActivityWatch](https://activitywatch.net/) — Open source tool usage tracker (discover which tools to connect)
 
 ---

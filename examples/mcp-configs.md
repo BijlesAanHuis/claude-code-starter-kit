@@ -345,7 +345,8 @@ Scrapes any webpage as markdown, even behind bot detection.
 
 The MCP ecosystem is growing fast. These directories list hundreds of available servers:
 
-- **[Official MCP Server Directory](https://modelcontextprotocol.io/servers)** — Maintained by Anthropic
+- **[Official MCP Servers repo](https://github.com/modelcontextprotocol/servers)** — Reference implementations by Anthropic (great for understanding how servers are built)
+- **[MCP Server Directory](https://modelcontextprotocol.io/servers)** — Browsable list maintained by Anthropic
 - **[Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)** — Community curated, 1000+ servers
 - **[MCP.so](https://mcp.so/)** — Searchable directory with categories
 - **[Smithery](https://smithery.ai/)** — Another searchable MCP directory
