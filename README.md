@@ -53,11 +53,13 @@ Or if you prefer the desktop app: [claude.ai/download](https://claude.ai/downloa
 
 ### Step 2: Connect GitHub and Let Claude Help You Set Up
 
-Before doing anything else, set up the GitHub MCP server:
+Before doing anything else, set up the GitHub MCP server. An MCP server is a plugin that lets Claude talk to an external tool — in this case, GitHub. We will explain what MCP is in detail later. For now, just do this:
 
 ```
 Tell Claude: "Set up the GitHub MCP server for me"
 ```
+
+Claude will create the config, ask you for a GitHub token, and test the connection. Follow its instructions.
 
 Once GitHub is connected, give Claude this repo:
 
