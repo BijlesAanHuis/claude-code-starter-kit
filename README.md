@@ -1,6 +1,16 @@
 # Claude Code Starter Kit
 
-Everything you need to go from zero to a fully connected Claude Code setup. This repo is the take-home kit from our AI Day session.
+Everything you need to go from zero to a fully connected Claude Code setup.
+
+### TL;DR — 5 steps, 30 minutes
+
+1. `npm install -g @anthropic-ai/claude-code`
+2. Create `~/.claude/CLAUDE.md` ([template](./CLAUDE.md.template))
+3. Add MCP servers — just tell Claude: *"Set up the GitHub MCP server for me"*
+4. Drop [starter skills](./skills/) into `~/.claude/skills/`
+5. Try: `claude "Search my GitHub repos for open PRs older than 3 days"`
+
+Everything below explains why each step matters and how to get the most out of it.
 
 ## What is Claude Code?
 
