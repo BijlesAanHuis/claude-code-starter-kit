@@ -2,15 +2,13 @@
 
 Everything you need to go from zero to a fully connected Claude Code setup.
 
-### TL;DR — 5 steps, 30 minutes
+### TL;DR — 5 minutes to get started
 
 1. `npm install -g @anthropic-ai/claude-code`
-2. Create `~/.claude/CLAUDE.md` ([template](./CLAUDE.md.template))
-3. Add MCP servers — just tell Claude: *"Set up the GitHub MCP server for me"*
-4. Drop [starter skills](./skills/) into `~/.claude/skills/`
-5. Try: `claude "Search my GitHub repos for open PRs older than 3 days"`
+2. Tell Claude: *"Set up the GitHub MCP server for me"*
+3. Tell Claude: *"Read the repo at github.com/BijlesAanHuis/claude-code-starter-kit and help me set up my environment"*
 
-Everything below explains why each step matters and how to get the most out of it.
+That is it. Claude reads this guide and walks you through the rest. Everything below explains what each part does and why.
 
 ## What is Claude Code?
 
@@ -53,7 +51,24 @@ Or if you prefer the desktop app: [claude.ai/download](https://claude.ai/downloa
 
 **Auth:** When you first run `claude`, it will ask you to log in. If you have a Claude Pro, Max, or Team subscription, you just log in with your account — no API key needed. Only if you want to use the API programmatically do you need a key from [console.anthropic.com](https://console.anthropic.com).
 
-### Step 2: Create Your CLAUDE.md
+### Step 2: Connect GitHub and Let Claude Help You Set Up
+
+Before doing anything else, set up the GitHub MCP server:
+
+```
+Tell Claude: "Set up the GitHub MCP server for me"
+```
+
+Once GitHub is connected, give Claude this repo:
+
+```
+Read the repo at github.com/BijlesAanHuis/claude-code-starter-kit
+and help me set up my Claude Code environment based on the guide.
+```
+
+From here, Claude can walk you through every remaining step: creating your CLAUDE.md, adding more MCP servers, installing skills. You do not need to follow this README manually — Claude reads it and does it with you.
+
+### Step 3: Create Your CLAUDE.md
 
 CLAUDE.md is a markdown file that tells Claude how to work with you and your project. It is not about code style — it is about **context**.
 
