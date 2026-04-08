@@ -1,0 +1,53 @@
+# CLAUDE.md Template
+
+Copy this to `~/.claude/CLAUDE.md` (global) or `./CLAUDE.md` (project-specific) and adapt it.
+
+---
+
+# About This Project
+
+<!-- What does this project do? One or two sentences. -->
+We are building a [describe your product/service].
+Backend: [Go / Node / Python / etc.]
+Frontend: [React / Angular / Vue / etc.]
+
+# Team
+
+<!-- Who works on this? Helps Claude address the right people. -->
+- [Name]: [role]
+- [Name]: [role]
+- [Name]: [role]
+
+# How We Work
+
+<!-- Conventions, tools, and processes Claude should follow. -->
+- Project tracker: [Jira / Linear / Asana] — project key: [KEY]
+- Branch naming: [e.g., feature/KEY-{ticket}]
+- Commit messages: [e.g., KEY-{ticket}: description]
+- Always run tests before creating a PR
+- [Add your own conventions here]
+
+# Preferences
+
+<!-- How should Claude behave? -->
+- Short responses unless I ask for depth
+- Push back if my idea has a hole in it
+- Skip disclaimers and preamble
+- When unsure, ask one clarifying question instead of guessing
+
+# Connected Tools
+
+<!-- List the MCP servers you have set up so Claude knows what it can use. -->
+- GitHub — code, PRs, issues
+- Jira — tickets, sprints
+- [Add your tools here]
+
+# Auto-Invoke Rules (optional)
+
+<!-- Automatically trigger skills based on keywords. Remove this section if you do not use skills yet. -->
+
+| Trigger | Skill |
+|---------|-------|
+| "bug", "broken", "not working" | /bug-triage |
+| "ship", "deploy", "create PR" | /ship |
+| "review this", "code review" | /code-review |
