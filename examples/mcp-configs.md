@@ -27,16 +27,12 @@ Example configs for `~/.claude/settings.json`. Copy the ones you need into your 
 ## Code & Version Control
 
 ### GitHub
-```json
-"github": {
-  "command": "npx",
-  "args": ["-y", "@modelcontextprotocol/server-github"],
-  "env": {
-    "GITHUB_TOKEN": "ghp_your-token-here"
-  }
-}
+No MCP needed. Use the GitHub CLI instead — it is simpler and more reliable:
+```bash
+brew install gh
+gh auth login
 ```
-Create a token at: github.com/settings/tokens (scopes: repo, read:org)
+Claude can use `gh` commands directly to read repos, create PRs, search code, and manage issues.
 
 ### GitLab
 ```json
@@ -364,16 +360,14 @@ Your full `~/.claude/settings.json` looks like this:
 ```json
 {
   "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "your-token"
-      }
-    },
     "atlassian": {
       "command": "npx",
       "args": ["-y", "@anthropic/mcp-remote", "https://mcp.atlassian.com/v1/sse"],
+      "env": {}
+    },
+    "hubspot": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-remote", "https://mcp.hubspot.com/sse"],
       "env": {}
     }
   }

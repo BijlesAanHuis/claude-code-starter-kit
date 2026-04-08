@@ -5,7 +5,7 @@ Everything you need to go from zero to a fully connected Claude Code setup.
 ### TL;DR — 5 minutes to get started
 
 1. `npm install -g @anthropic-ai/claude-code`
-2. Tell Claude: *"Set up the GitHub MCP server for me"*
+2. `brew install gh && gh auth login`
 3. Tell Claude: *"Read the repo at github.com/BijlesAanHuis/claude-code-starter-kit and help me set up my environment"*
 
 That is it. Claude reads this guide and walks you through the rest. Everything below explains what each part does and why.
@@ -53,15 +53,16 @@ Or if you prefer the desktop app: [claude.ai/download](https://claude.ai/downloa
 
 ### Step 2: Connect GitHub and Let Claude Help You Set Up
 
-Before doing anything else, set up the GitHub MCP server. An MCP server is a plugin that lets Claude talk to an external tool — in this case, GitHub. We will explain what MCP is in detail later. For now, just do this:
+Before doing anything else, install the GitHub CLI and log in:
 
+```bash
+brew install gh
+gh auth login
 ```
-Tell Claude: "Set up the GitHub MCP server for me"
-```
 
-Claude will create the config, ask you for a GitHub token, and test the connection. Follow its instructions.
+Follow the prompts — it authenticates via browser, no tokens needed. Once logged in, Claude can read repos, create PRs, and search code through `gh` commands.
 
-Once GitHub is connected, give Claude this repo:
+Now give Claude this repo:
 
 ```
 Read the repo at github.com/BijlesAanHuis/claude-code-starter-kit
@@ -132,10 +133,10 @@ This is where most people get stuck. Claude Code needs a specific directory stru
 │   ├── ship.md
 │   └── code-review.md
 ├── mcp-servers/           ← Local MCP server installations
-│   ├── github/
+│   ├── hubspot/
 │   │   ├── .env           ← API keys (never commit this)
 │   │   └── run.sh         ← Startup script
-│   ├── hubspot/
+│   ├── loom/
 │   │   ├── .env
 │   │   └── run.sh
 │   └── my-custom-server/
@@ -162,26 +163,26 @@ This is where most people get stuck. Claude Code needs a specific directory stru
 
 **Pattern 2: Local servers (more control)** — A folder in `~/.claude/mcp-servers/` with a run script and `.env` file:
 ```bash
-# ~/.claude/mcp-servers/github/run.sh
+# ~/.claude/mcp-servers/hubspot/run.sh
 #!/bin/bash
 set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 set -a
 source "$SCRIPT_DIR/.env"
 set +a
-exec npx -y @modelcontextprotocol/server-github
+exec npx -y @hubspot/mcp-server
 ```
 
 ```bash
-# ~/.claude/mcp-servers/github/.env
-GITHUB_TOKEN=ghp_your-token-here
+# ~/.claude/mcp-servers/hubspot/.env
+HUBSPOT_ACCESS_TOKEN=your-token-here
 ```
 
 Then in your config, reference the run script:
 ```json
-"github": {
+"hubspot": {
   "command": "bash",
-  "args": ["/path/to/.claude/mcp-servers/github/run.sh"]
+  "args": ["/path/to/.claude/mcp-servers/hubspot/run.sh"]
 }
 ```
 
