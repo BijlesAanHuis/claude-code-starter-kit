@@ -51,6 +51,8 @@ npm install -g @anthropic-ai/claude-code
 
 Or if you prefer the desktop app: [claude.ai/download](https://claude.ai/download)
 
+**Auth:** When you first run `claude`, it will ask you to log in. If you have a Claude Pro, Max, or Team subscription, you just log in with your account — no API key needed. Only if you want to use the API programmatically do you need a key from [console.anthropic.com](https://console.anthropic.com).
+
 ### Step 2: Create Your CLAUDE.md
 
 CLAUDE.md is a markdown file that tells Claude how to work with you and your project. It is not about code style — it is about **context**.
