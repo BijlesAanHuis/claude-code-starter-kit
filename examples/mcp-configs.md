@@ -4,7 +4,7 @@ Example configs for `~/.claude/settings.json`. Copy the ones you need into your 
 
 > **Reminder:** You can also just tell Claude: "Set up the [tool] MCP server for me" and it will do this for you.
 
-> **Note:** MCP servers and their configs change frequently. The examples below are a starting point — always check the server's official repo or the [MCP directory](https://modelcontextprotocol.io/servers) for the latest install instructions. If a config does not work, ask Claude to fix it or install it fresh for you.
+> **Important:** These configs are examples and have not all been individually verified. MCP servers update frequently — package names, auth methods, and URLs can change. Always check the [official MCP directory](https://modelcontextprotocol.io/servers) or the server's repo for the latest instructions. If a config does not work, just ask Claude: "Set up [tool] MCP for me" — it will find the current setup method.
 
 ## Table of Contents
 
