@@ -45,13 +45,17 @@ Each of these likely has an MCP server. The more you connect, the more Claude ca
 
 ### Step 1: Install Claude Code
 
+Open your **terminal** (on Mac: search for "Terminal" in Spotlight. On Windows: search for "PowerShell". On Linux: you know where it is) and run:
+
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-Or if you prefer the desktop app: [claude.ai/download](https://claude.ai/download)
+> **Do not have npm?** You need Node.js first. Download it from [nodejs.org](https://nodejs.org/) — pick the LTS version. This installs both `node` and `npm`. After installing, close and reopen your terminal, then run the command above.
 
-**Auth:** When you first run `claude`, it will ask you to log in. If you have a Claude Pro, Max, or Team subscription, you just log in with your account — no API key needed. Only if you want to use the API programmatically do you need a key from [console.anthropic.com](https://console.anthropic.com).
+Or if you prefer a desktop app instead of the terminal: [claude.ai/download](https://claude.ai/download)
+
+**Auth:** When you first run `claude` in your terminal, it will ask you to log in. If you have a Claude Pro, Max, or Team subscription, you just log in with your account — no API key needed. Only if you want to use the API programmatically do you need a key from [console.anthropic.com](https://console.anthropic.com).
 
 ### Step 2: Connect GitHub and Let Claude Help You Set Up
 
